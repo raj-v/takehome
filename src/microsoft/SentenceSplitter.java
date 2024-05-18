@@ -7,19 +7,7 @@ import java.util.Locale;
 
 public class SentenceSplitter {
 
-    private static final int CHUNK_SIZE = 50;
-
-
-    public static void main(String[] args) {
-        String input = "Hello, world! This is a sample text. It has multiple sentences.";
-        List<String> sentences = splitIntoSentences(input);
-        List<String> groupedSentences = optimizeSentenceSplitToFitChunkSize(sentences);
-        for (String sentence : groupedSentences) {
-            System.out.println(sentence);
-        }
-    }
-
-    public static List<String> splitIntoSentences(String input) {
+    public List<String> splitIntoSentences(String input) {
         List<String> sentences = new ArrayList<>();
         BreakIterator iterator = BreakIterator.getSentenceInstance(Locale.US);
         iterator.setText(input);
@@ -32,11 +20,11 @@ public class SentenceSplitter {
         return sentences;
     }
 
-    private static List<String> optimizeSentenceSplitToFitChunkSize(List<String> sentences) {
+    public List<String> optimizeSentenceSplitToFitChunkSize(List<String> sentences, int chunkSize) {
         List<String> optimized = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < sentences.size(); i ++) {
-            if (sb.length() + sentences.get(i).length() < CHUNK_SIZE) {
+            if (sb.length() + sentences.get(i).length() < chunkSize) {
                 sb.append(sentences.get(i));
             } else {
                 optimized.add(sb.toString());
@@ -48,4 +36,11 @@ public class SentenceSplitter {
         }
         return optimized;
     }
+
+    public List<String> splitSentecesAndGroupForChunkSize(String input, int chunkSize) {
+        List<String> splitSentences = splitIntoSentences(input);
+        List<String> groupedToFitChunkSize = optimizeSentenceSplitToFitChunkSize(splitSentences, chunkSize);
+        return groupedToFitChunkSize;
+    }
+
 }
