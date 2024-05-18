@@ -20,7 +20,7 @@ public class SentenceSplitter {
         return sentences;
     }
 
-    public List<String> optimizeSentenceSplitToFitChunkSize(List<String> sentences, int chunkSize) {
+    public List<String> groupSentencesByChunkSize(List<String> sentences, int chunkSize) {
         List<String> optimized = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < sentences.size(); i ++) {
@@ -37,9 +37,9 @@ public class SentenceSplitter {
         return optimized;
     }
 
-    public List<String> splitSentecesAndGroupForChunkSize(String input, int chunkSize) {
+    public List<String> splitSentencesAndGroupByChunkSize(String input, int chunkSize) {
         List<String> splitSentences = splitIntoSentences(input);
-        List<String> groupedToFitChunkSize = optimizeSentenceSplitToFitChunkSize(splitSentences, chunkSize);
+        List<String> groupedToFitChunkSize = groupSentencesByChunkSize(splitSentences, chunkSize);
         return groupedToFitChunkSize;
     }
 

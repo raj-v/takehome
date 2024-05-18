@@ -13,7 +13,7 @@ public class FeedbackIntegratedProcessWrapper implements ProcessWrapper {
     }
 
     public String processWrapper(String input) {
-        List<String> splitSentences = sentenceSplitter.splitSentecesAndGroupForChunkSize(input,
+        List<String> splitSentences = sentenceSplitter.splitSentencesAndGroupByChunkSize(input,
                 ProcessWrapperUtils.ADJUSTED_CHUNK_SIZE);
         String summarySoFar = null;
         for (String s: splitSentences) {
